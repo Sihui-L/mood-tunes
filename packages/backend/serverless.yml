@@ -1,0 +1,78 @@
+service: moodtunes-backend
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-2
+  environment:
+    PLAYLISTS_TABLE: ${self:service}-playlists-${sls:stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: !GetAtt PlaylistsTable.Arn
+
+plugins:
+  - serverless-offline
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude: ["aws-sdk"]
+    target: "node20"
+    platform: "node"
+    concurrency: 10
+
+functions:
+  createPlaylist:
+    handler: src/functions/playlists/create.handler
+    events:
+      - http:
+          path: /playlists
+          method: post
+          cors: true
+
+  getPlaylists:
+    handler: src/functions/playlists/get.handler
+    events:
+      - http:
+          path: /playlists
+          method: get
+          cors: true
+
+  moodMatch:
+    handler: src/functions/mood/match.handler
+    events:
+      - http:
+          path: /mood/match
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    PlaylistsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.PLAYLISTS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: playlistId
+            AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: playlistId
+            KeyType: HASH
+          - AttributeName: userId
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST

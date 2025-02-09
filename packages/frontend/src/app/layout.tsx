@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "MoodTunes 🎵",
   description: "AI-powered music recommendations based on your mood.",
   icons: {
-    icon: "/MoodTunes-Logo.jpg",
+    icon: "/Jellycat.png",
   }
 };
 

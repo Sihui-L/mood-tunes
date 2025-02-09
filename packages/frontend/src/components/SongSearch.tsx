@@ -1,22 +1,22 @@
 "use client";
 
 import { useState } from "react";
-
-interface track {
-  id: string;
-  name: string;
-  artists: { name: string }[];
-}
+import Player from "./Player";
+import { Song } from "../types/index";
 
 export default function SongSearch() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [query, setQuery] = useState<string>("");
+  const [tracks, setTracks] = useState<Song[]>([]);
+  const [loading, setloading] = useState<boolean>(false);
 
   const searchSongs = async (e: React.FormEvent) => {
+    setloading(true);
     e.preventDefault();
     const res = await fetch(`/api/spotify/search?q=${query}`);
     const data = await res.json();
-    setResults(data.tracks.items || []);
+    setTracks(data.tracks.items || []);
+    console.log('songs:', data.tracks.items);
+    setloading(false);
   };
 
   return (
@@ -31,21 +31,10 @@ export default function SongSearch() {
           placeholder="Search for a song..."
         />
         <button type="submit" className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">
-          Search
+          {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
-
-      <div className="mt-4">
-        {results.length > 0 && (
-          <ul>
-            {results.map((track: track) => (
-              <li key={track.id} className="mt-2">
-                🎵 {track.name} - {track.artists.map((artist) => artist.name).join(', ')}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {tracks.map((track) => <Player key={track.id} song={track}/>)}
     </div>
   );
 }

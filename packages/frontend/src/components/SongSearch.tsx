@@ -15,26 +15,25 @@ export default function SongSearch() {
     const res = await fetch(`/api/spotify/search?q=${query}`);
     const data = await res.json();
     setTracks(data.tracks.items || []);
-    console.log('songs:', data.tracks.items);
     setloading(false);
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-bold mb-2">Search Songs</h2>
+    <div>
+      <h2 className="text-xl font-bold mb-4">Search Songs</h2>
       <form onSubmit={searchSongs}>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="border p-2 text-black rounded"
+          className="border p-2 mb-4 text-black rounded"
           placeholder="Search for a song..."
         />
         <button type="submit" className="ml-2 bg-blue-500 text-white px-4 py-2 rounded">
           {loading ? 'Searching...' : 'Search'}
         </button>
       </form>
-      {tracks.map((track) => <Player key={track.id} song={track}/>)}
+      {tracks.length > 0 && tracks.map((track) => <Player key={track.id} song={track}/>)}
     </div>
   );
 }

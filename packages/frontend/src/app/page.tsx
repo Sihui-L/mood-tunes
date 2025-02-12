@@ -3,6 +3,7 @@
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import SongSearch from "../components/SongSearch";
 import MoodPlaylist from "../components/MoodPlaylist";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 export default function Page() {
   const { user } = useAuthenticator((context) => [context.user]);

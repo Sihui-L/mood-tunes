@@ -38,7 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* ✅ Global Auth Provider */}
         <Authenticator.Provider>
           <Header />
           <main className="container mx-auto px-6 py-8 flex-grow">{children}</main>

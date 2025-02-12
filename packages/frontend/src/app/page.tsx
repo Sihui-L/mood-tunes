@@ -1,39 +1,26 @@
 "use client";
 
-import { Amplify } from "aws-amplify";
-import awsExports from "../aws-exports";
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-import Login from "../components/Login";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import SongSearch from "../components/SongSearch";
 import MoodPlaylist from "../components/MoodPlaylist";
 
-Amplify.configure(awsExports);
+export default function Page() {
+  const { user } = useAuthenticator((context) => [context.user]);
 
-interface HomeProps {
-  signOut: () => void;
-  user: {
-    username: string;
-  };
-}
-
-function Home({ signOut, user }: HomeProps) {
   return (
     <>
-      <Login user={user} signOut={signOut} />
-      <div className="mt-6">
-        <SongSearch />
-        <MoodPlaylist />
-      </div>
+      {user ? (
+        <>
+          <div className="mt-6">
+            <SongSearch />
+            <MoodPlaylist />
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <Authenticator />
+        </div>
+      )}
     </>
   );
-}
-
-const AuthenticatedHome = withAuthenticator(Home);
-export default function Page() {
-  return <AuthenticatedHome signOut={function (): void {
-    throw new Error("Function not implemented.");
-  } } user={{
-    username: ""
-  }} />;
 }

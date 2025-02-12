@@ -215,7 +215,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/moodtunes-backend/dev/1738984643242-2025-02-08T03:17:23.242Z/moodtunes-backend.zip"
+                "S3Key": "serverless/moodtunes-backend/dev/1739309026612-2025-02-11T21:23:46.612Z/moodtunes-backend.zip"
               },
               "Handler": "src/functions/playlists/create.handler",
               "Runtime": "nodejs20.x",
@@ -245,7 +245,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/moodtunes-backend/dev/1738984643242-2025-02-08T03:17:23.242Z/moodtunes-backend.zip"
+                "S3Key": "serverless/moodtunes-backend/dev/1739309026612-2025-02-11T21:23:46.612Z/moodtunes-backend.zip"
               },
               "Handler": "src/functions/playlists/get.handler",
               "Runtime": "nodejs20.x",
@@ -275,7 +275,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/moodtunes-backend/dev/1738984643242-2025-02-08T03:17:23.242Z/moodtunes-backend.zip"
+                "S3Key": "serverless/moodtunes-backend/dev/1739309026612-2025-02-11T21:23:46.612Z/moodtunes-backend.zip"
               },
               "Handler": "src/functions/mood/match.handler",
               "Runtime": "nodejs20.x",
@@ -610,7 +610,7 @@
               "MoodMatchLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1738984641413": {
+          "ApiGatewayDeployment1739309024459": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1098,7 +1098,7 @@
     "artifact": "/Users/sihuili/Downloads/repo/mood-tunes/packages/backend/.serverless/moodtunes-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/moodtunes-backend/dev/1738984643242-2025-02-08T03:17:23.242Z",
+    "artifactDirectoryName": "serverless/moodtunes-backend/dev/1739309026612-2025-02-11T21:23:46.612Z",
     "artifact": "moodtunes-backend.zip"
   }
 }

@@ -13,8 +13,6 @@
     "deploy:backend": "npm run deploy --workspace=packages/backend"
   },
   "devDependencies": {
-    "@aws-amplify/backend": "^1.14.0",
-    "@aws-amplify/backend-cli": "^1.4.9",
     "@types/node": "^20.11.0",
     "aws-cdk": "^2.178.1",
     "aws-cdk-lib": "^2.178.1",
@@ -22,8 +20,5 @@
     "esbuild": "^0.24.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "aws-amplify": "^6.12.3"
   }
 }
